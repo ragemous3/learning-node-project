@@ -1,6 +1,9 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+const port = process.env.PORT || 3000;
+//env is a variable that stores all environment variables in key=value-pairs.
+//PORT is the one that heroku sets.
 var app = express();
 hbs.registerPartials(__dirname + '/views/partials'); // BYGGA PARTER AV EN WEBBSIDA
 app.set('view engine', 'hbs');//key=grejen du vill "settar en viewengine", "hbs" <-viewengine
@@ -57,61 +60,7 @@ app.get('/bad', (req, res) => {
     message: 'ERRRR! seems like your in the wrong place pal'
   });
 })
-app.listen(3000, () => {
+app.listen(port, () => {
 
-  console.log('server is up on port 3000 ')
+  console.log(`Server is up on ${port}`)
 });
-
-
-/*
-Tror jag löste koden. Genom att skriva såhär i express
-så kan man skicka request via javascripten. till
-sin egen sida för att requesta. tex. om jag gör en knapp
-så görs en get till en sida som uppdaterar innehållet.
-///////////////////////app.get
-
-///////////////////////app.use
-finns för att hantera request till adresser i programmet
-
-exekverar kod för varje request, app.use(PATH//EVENTUELT CALLBACK ELLER BÅDA):
-----metoder
-  next(); <--- säger till att fortsätta programmet
-
-////////////////////////HANDLERS
-Handlers är det som hanterar requests till min sida.
-
-////////////////////////STATIC DIRECTORY
-Static assets.
-////////////////////////__dirname
-  - dirname (är en av parametrana i wrappern som skickar in sökvägen)
-////////////////////////app.listen(3000 <---- lyssnar på port 3000, FUNKTION (VAD SKA SIDAN GÖRA I CMD  MEDANS DEN LADDAR IN SAKER))
-
-///////////////////////Handlebars///////////////////////
-- view-engine
-//används tillsammans med express för att göra
-det enklare att ladda in skit på sidan dynamiskt.
-är en "view-engine" som använd tsm:ans med express
-för att rendera html.
-
-hbs är starkt för att man kan använda partials
-med partials kan jag återanvända kod på ett enkelt sätt.
-////////////////////////Views///////////////////////
-views är default-mappen för html-templat i express
-som t.ex. /about <--- /home renderas in i browsern från den mappen.
-
-/////////////////////////--save-dev///////////////////////
-
-dev gör så att ett specifikt paket inte körs på servern.
-
-
-/////////////////////////request.res !!!!!!!!!!!!!!!!!!!!
-request.res
-I den finns all information om anslutningen.
-Man kan t.ex. ta ut URLEN som användaren vill koppla upp sig te eller
-óm det är en mobil eller vad det är för metod.
-precis som $todoObj = Pdo(localhostblabla) i php.
-
-/////////////////////////VERSION CONTROL //////////////////////////////
-
-
-*/
